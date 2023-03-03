@@ -8,12 +8,6 @@ Creates a php project structure following the PHP Package Development Standards 
 make build
 ```
 
-## Install the project globally
-
-```bash
-make install
-```
-
 ## Example of creating a PHP project
 
 ```bash
