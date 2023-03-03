@@ -20,3 +20,13 @@ make install
 # project_name - this is a project name
 ./php-pds-skeleton project_name
 ```
+
+## Run tests
+
+```bash
+# run tests
+make test
+
+# see the level of code coverage by tests
+make coverage
+```

@@ -3,6 +3,7 @@ package creator
 import (
 	"errors"
 	"fmt"
+	"io/fs"
 	"log"
 	"os"
 	"text/template"
@@ -30,7 +31,7 @@ func (c *Creator) setProjectName() {
 }
 
 func (*Creator) checkArgs() error {
-	if len(os.Args) == 1 {
+	if len(os.Args) < 2 {
 		return errors.New("checkArgs: the project name is not set")
 	}
 	return nil
@@ -48,20 +49,9 @@ func (c *Creator) setInnerDirs() {
 }
 
 func (c *Creator) CreateProjectStructure() {
-	err := c.createDir(c.ProjectName)
-	if err != nil && !os.IsExist(err) {
-		log.Fatalln(err)
-	}
+	c.createDirs()
 
-	for _, dir := range c.innerDirs {
-		path := fmt.Sprintf("%s/%s", c.ProjectName, dir)
-		err = c.createDir(path)
-		if err != nil && !os.IsExist(err) {
-			log.Fatalln(err)
-		}
-	}
-
-	err = c.createPublicIndexPhp()
+	err := c.createPublicIndexPhp()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -88,6 +78,21 @@ func (c *Creator) CreateProjectStructure() {
 	err = c.createComposerJson()
 	if err != nil {
 		log.Fatalln(err)
+	}
+}
+
+func (c *Creator) createDirs() {
+	err := c.createDir(c.ProjectName)
+	if err != nil && errors.Is(err, fs.ErrNotExist) {
+		log.Fatalln(err)
+	}
+
+	for _, dir := range c.innerDirs {
+		path := fmt.Sprintf("%s/%s", c.ProjectName, dir)
+		err = c.createDir(path)
+		if err != nil && errors.Is(err, fs.ErrNotExist) {
+			log.Fatalln(err)
+		}
 	}
 }
 

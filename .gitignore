@@ -4,3 +4,6 @@
 
 # app
 /php-pds-skeleton
+
+# tests
+/cover.out
