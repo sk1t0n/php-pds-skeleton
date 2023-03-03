@@ -1,5 +1,7 @@
 # php-pds-skeleton
 
+[![CI/CD](https://github.com/sk1t0n/php-pds-skeleton/actions/workflows/ci.yml/badge.svg)](https://github.com/sk1t0n/php-pds-skeleton/actions/workflows/ci.yml)
+
 Creates a php project structure following the PHP Package Development Standards [pds/skeleton](https://github.com/php-pds/skeleton).
 
 ## Build the project
