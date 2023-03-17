@@ -232,6 +232,12 @@ func (c *Creator) createComposerJson() error {
       "Tests\\": "tests/"
     }
   },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
   "prefer-stable": true
 }
 `

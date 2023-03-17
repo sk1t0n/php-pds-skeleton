@@ -252,6 +252,12 @@ func TestCreateComposerJson(t *testing.T) {
       "Tests\\": "tests/"
     }
   },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
   "prefer-stable": true
 }
 `
