@@ -75,6 +75,10 @@ func (c *Creator) CreateProjectStructure() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	err = c.createPrettierrcJson()
+	if err != nil {
+		log.Fatalln(err)
+	}
 	err = c.createComposerJson()
 	if err != nil {
 		log.Fatalln(err)
@@ -214,6 +218,17 @@ indent_style = space
 indent_size = 2
 `
 	file := fmt.Sprintf("%s/.editorconfig", c.ProjectName)
+	err := os.WriteFile(file, []byte(content), 0666)
+	return err
+}
+
+func (c *Creator) createPrettierrcJson() error {
+	content := `{
+  "semi": false,
+  "singleQuote": true
+}
+`
+	file := fmt.Sprintf("%s/.prettierrc.json", c.ProjectName)
 	err := os.WriteFile(file, []byte(content), 0666)
 	return err
 }

@@ -234,6 +234,24 @@ indent_size = 2
 	})
 }
 
+func TestCreatePrettierrcJson(t *testing.T) {
+	runTest(func() {
+		creator.createPrettierrcJson()
+		file := fmt.Sprintf("%s/.prettierrc.json", projectName)
+		prettierrcjson, err := os.ReadFile(file)
+		expectedContent := `{
+  "semi": false,
+  "singleQuote": true
+}
+`
+		if err != nil {
+			t.Error(err)
+		} else if string(prettierrcjson) != expectedContent {
+			t.Error("the content of the file does not match the expected content")
+		}
+	})
+}
+
 func TestCreateComposerJson(t *testing.T) {
 	runTest(func() {
 		creator.createComposerJson()
