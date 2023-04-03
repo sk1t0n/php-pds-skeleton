@@ -76,7 +76,10 @@ func TestCreatePublicIndexPhp(t *testing.T) {
 		creator.createPublicIndexPhp()
 		file := fmt.Sprintf("%s/public/index.php", projectName)
 		indexPhp, err := os.ReadFile(file)
-		expectedContent := "<?php\n"
+		expectedContent := `<?php
+
+require dirname(__DIR__).'/vendor/autoload.php';
+`
 		if err != nil {
 			t.Error(err)
 		} else if string(indexPhp) != expectedContent {

@@ -107,7 +107,10 @@ func (*Creator) createDir(dirName string) error {
 
 func (c *Creator) createPublicIndexPhp() error {
 	file := fmt.Sprintf("%s/public/index.php", c.ProjectName)
-	content := "<?php\n"
+	content := `<?php
+
+require dirname(__DIR__).'/vendor/autoload.php';
+`
 	err := os.WriteFile(file, []byte(content), 0666)
 	return err
 }
